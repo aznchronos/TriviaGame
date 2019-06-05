@@ -12,12 +12,12 @@ $(document).ready(function(){
         "Question 1", "Question 2"
     ];
 
-    var answers = [
+    var answersArray = [
         ["Answer1", "Answer2", "Answer3", "Answer4"],
         ["Answer1", "Answer2", "Answer3", "Answer4"]
     ];
 
-    var correctAnswers = [
+    var correctAnswersArray = [
         "Answer2",
         "Answer3"
     ];
@@ -48,19 +48,23 @@ $(document).ready(function(){
     function generatePage() {
         gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
             timer + "</span></h1><h3 class='text-center'>" + questions[counter] +
-            "</h3><div class='container qButtons'><button class='answer'>1. " + answers[counter][0] +
-            "</button><button class='answer'>2. " + answers[counter][1] +
-            "</button><button class='answer'>3. " + answers[counter][2] +
-            "</button><button class='answer'>4. " + answers[counter][3] +
+            "</h3><div class='container qButtons'><button class='answer'>1. " + answersArray[counter][0] +
+            "</button><button class='answer'>2. " + answersArray[counter][1] +
+            "</button><button class='answer'>3. " + answersArray[counter][2] +
+            "</button><button class='answer'>4. " + answersArray[counter][3] +
             "</button></div>";
         $(".gameID").html(gamePage);
     };
+
+    function correctAnswer(){
+        console.log("correct")
+    }
 
     function questionTimeout() {
         unanswered++;
         gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
             timer + "</span></h1><h3 class='text-center'>Times Up!</h3>" +
-            "<h3>The answer is: " + correctAnswers[counter] + "</h3>" +
+            "<h3>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'>" + "</div>"
             displayLoseImage();
             $(".gameID").html(gamePage);
