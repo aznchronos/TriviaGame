@@ -5,6 +5,7 @@ $(document).ready(function(){
     var counter = 0;
     var time = 0;
     var timer = 30;
+    var started = false;
     var imagesWin = ["assets/images/1win.gif", "assets/images/2win.gif", "assets/images/3win.gif", "assets/images/4win.gif", "assets/images/5win.gif"];
     var imagesLose = ["assets/images/1lose.gif", "assets/images/2lose.gif", "assets/images/3lose.gif", "assets/images/4lose.gif", "assets/images/5lose.gif"];
 
@@ -22,6 +23,7 @@ $(document).ready(function(){
     $("#startGame").on("click", function (event) {
         $("#startGame").hide();
         $("#image-holder").hide();
+        started = true;
         clock();
         generatePage();
     });
@@ -45,6 +47,7 @@ $(document).ready(function(){
         var unanswered = 0;
         var counter = 0;
         var timer = 30;
+        started = true;
         generatePage();
         clock();
     })
@@ -77,6 +80,18 @@ $(document).ready(function(){
         $(".gameID").html(gamePage);
     };
 
+    function endGame() {
+        gamePage = "<h1 class='text-center'>Thanks for Playing!</h1>" +
+            "<h3 class='text-center'>Number Correct: " + correct + "</h3>" +
+            "<h3 class='text-center'>Number Incorrect: " + incorrect + "</h3>" +
+            "<h3 class='text-center'>Number Unanswered: " + unanswered + "</h3>" +
+            "<button class='reset'>Reset?</button>"
+            $(".gameID").html(gamePage);
+            clearTimeout();
+            clearInterval();
+            started = false;
+    }
+
     function correctAnswer(){
         correct++;
         timer = 5;
@@ -85,8 +100,8 @@ $(document).ready(function(){
             timer + "</span></h1><h3 class='text-center'>You Win!</h3>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
-            displayWinImage();
             $(".gameID").html(gamePage);
+            displayWinImage();
             setTimeout(function(){
                 wait();
             }, 5000);
@@ -100,8 +115,8 @@ $(document).ready(function(){
             timer + "</span></h1><h3 class='text-center'>You Lose!</h3>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
-            displayLoseImage();
             $(".gameID").html(gamePage);
+            displayLoseImage();
             setTimeout(wait, 5000);
     }
 
@@ -112,16 +127,18 @@ $(document).ready(function(){
             timer + "</span></h1><h3 class='text-center'>Times Up!</h3>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
-            displayLoseImage();
             $(".gameID").html(gamePage);
+            displayLoseImage();
             setTimeout(wait, 5000);
     };
     
     function wait() {
-        if(counter < questions.length){
+        if(counter < questions.length - 1){
             counter++;
             generatePage();
             timer = 30;
+        } else {
+            endGame();
         }
     }
     
