@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
@@ -10,7 +11,7 @@ var questions = [
 ];
 
 var answers = [
-    ["Answer1", "Answer2", "Answer3", "Answer4"]
+    ["Answer1", "Answer2", "Answer3", "Answer4"],
     ["Answer1", "Answer2", "Answer3", "Answer4"]
 ];
 
@@ -20,9 +21,9 @@ var correctAnswers = [
 ];
 
 //To hide the start button
-$("#startGame").on("click", function(event){
+$("#startGame").on("click", function (event) {
     $("#startGame").hide();
-    //timer();
+    // timer();
     generatePage();
 });
 
@@ -30,31 +31,32 @@ $("#startGame").on("click", function(event){
 function timer() {
     time = setInterval(thirty, 1000);
     function thirty() {
-        if(timer === 0) {
+        if (timer === 0) {
             clearInterval(time);
             questionTimer();
         }
         if (timer > 0) {
             timer--;
         }
-        $("#timer").html(timer);
+        $(".timer").html(timer);
         alert("Test");
     }
 }
 
-function generatePage(){
+function generatePage() {
     console.log(counter);
-    gamePage = "<h1 id='timer' class='text-center'>Time Remaining: <span id='timer'>" +
+    gamePage = "<h1 class='text-center timer'>Time Remaining: <span class='timer'>" +
         timer + "</span></h1><h3 class='text-center'>" + questions[counter] +
-        "</h3><h3 class='answer'>1. " + answers[counter][0] +
-        "</h3><h3 class='answer'>2. " + answers[counter][1] +
-        "</h3><h3 class='answer'>3. " + answers[counter][2] +
-        "</h3><h3 class='answer'>4. " + answers[counter][3] +
-        "</h3>";
-    $(".gameID").html(gameHTML);
+        "</h3><button class='answer'>1. " + answers[counter][0] +
+        "</button><button class='answer'>2. " + answers[counter][1] +
+        "</button><button class='answer'>3. " + answers[counter][2] +
+        "</button><button class='answer'>4. " + answers[counter][3] +
+        "</button>";
+    $(".gameID").html(gamePage);
     console.log("Test2" + counter);
 
 };
 // $("body").on("click", "#answer", function(event){
 
 // });
+});
