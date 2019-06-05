@@ -9,7 +9,7 @@ $(document).ready(function(){
     var imagesLose = ["assets/images/1lose.gif", "assets/images/2lose.gif", "assets/images/3lose.gif", "assets/images/4lose.gif", "assets/images/5lose.gif"];
 
     var questions = ["Question 1", "Question 2", "Questions 3", "Questions 4", "Questions 5"];
-
+    var correctAnswersArray = ["Answer2", "Answer3", "Answer1", "Answer1", "Answer1"];
     var answersArray = [
         ["Answer1", "Answer2", "Answer3", "Answer4"],
         ["Answer1", "Answer2", "Answer3", "Answer4"],
@@ -17,8 +17,6 @@ $(document).ready(function(){
         ["Answer1", "Answer2", "Answer3", "Answer4"],
         ["Answer1", "Answer2", "Answer3", "Answer4"]
     ];
-
-    var correctAnswersArray = ["Answer2", "Answer3", "Answer1", "Answer1", "Answer1"];
 
     //To hide the start button
     $("#startGame").on("click", function (event) {
@@ -40,6 +38,16 @@ $(document).ready(function(){
             // console.log("Incorrect count: " + incorrect)
         }
     });
+
+    $("body").on("click", ".reset", function(event){
+        var correct = 0;
+        var incorrect = 0;
+        var unanswered = 0;
+        var counter = 0;
+        var timer = 5;
+        generatePage();
+        clock();
+    })
 
     //Set 30 second timer to function;
     function clock() {
