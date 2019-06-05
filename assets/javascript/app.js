@@ -4,7 +4,7 @@ $(document).ready(function(){
     var unanswered = 0;
     var counter = 0;
     var time = 0;
-    var timer = 5;
+    var timer = 30;
     var imagesWin = ["assets/images/1win.gif", "assets/images/2win.gif", "assets/images/3win.gif", "assets/images/4win.gif", "assets/images/5win.gif"];
     var imagesLose = ["assets/images/1lose.gif", "assets/images/2lose.gif", "assets/images/3lose.gif", "assets/images/4lose.gif", "assets/images/5lose.gif"];
 
@@ -44,13 +44,14 @@ $(document).ready(function(){
         var incorrect = 0;
         var unanswered = 0;
         var counter = 0;
-        var timer = 5;
+        var timer = 30;
         generatePage();
         clock();
     })
 
     //Set 30 second timer to function;
     function clock() {
+        timer = 30;
         time = setInterval(thirty, 1000);
         function thirty() {
             if (timer === 0) {
@@ -78,18 +79,22 @@ $(document).ready(function(){
 
     function correctAnswer(){
         correct++;
-        console.log("correct answer: " + correctAnswersArray[counter]);
+        timer = 5;
+        // console.log("correct answer: " + correctAnswersArray[counter]);
         gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
             timer + "</span></h1><h3 class='text-center'>You Win!</h3>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
             displayWinImage();
             $(".gameID").html(gamePage);
-            // setTimeout(wait, 5000);
+            setTimeout(function(){
+                wait();
+            }, 5000);
     }
 
     function incorrectAnswer(){
         incorrect++;
+        timer = 5;
         console.log("correct answer: " + correctAnswersArray[counter]);
         gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
             timer + "</span></h1><h3 class='text-center'>You Lose!</h3>" +
@@ -97,19 +102,28 @@ $(document).ready(function(){
             "<div id='image-holder' class='text-center'></div>"
             displayLoseImage();
             $(".gameID").html(gamePage);
-            // setTimeout(wait, 5000);
+            setTimeout(wait, 5000);
     }
 
     function questionTimeout() {
         unanswered++;
+        timer = 5;
         gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
             timer + "</span></h1><h3 class='text-center'>Times Up!</h3>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
             displayLoseImage();
             $(".gameID").html(gamePage);
-            // setTimeout(wait, 5000);
+            setTimeout(wait, 5000);
     };
+    
+    function wait() {
+        if(counter < questions.length){
+            counter++;
+            generatePage();
+            timer = 30;
+        }
+    }
     
     function displayLoseImage() {
         $("#image-holder").html("<img src=" + imagesLose[counter] + " width='400px'>");
