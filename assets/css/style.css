@@ -2,9 +2,21 @@ body{
     background-image: url(../images/background.gif);
 }
 
-.container{
+.questionable{
     padding-bottom: 300px;
 }
+.answer {
+    padding: 5px;
+    margin: 15px;
+}
+
+.qButtons{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
 
 .hover:hover{
     background-color: green;
