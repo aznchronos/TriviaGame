@@ -74,7 +74,7 @@ $(document).ready(function(){
             "<h3 class='text-center'>Number Correct: " + correct + "</h3>" +
             "<h3 class='text-center'>Number Incorrect: " + incorrect + "</h3>" +
             "<h3 class='text-center'>Number Unanswered: " + unanswered + "</h3>" +
-            "<button class='reset'>Reset?</button>";
+            "<div class='text-center'><button class='reset'>Reset?</button></div>";
             $(".gameID").html(gamePage);
             clearInterval(time);
             started = false;
