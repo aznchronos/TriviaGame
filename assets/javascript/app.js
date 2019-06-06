@@ -9,14 +9,18 @@ $(document).ready(function(){
     var imagesWin = ["assets/images/1win.gif", "assets/images/2win.gif", "assets/images/3win.gif", "assets/images/4win.gif", "assets/images/5win.gif"];
     var imagesLose = ["assets/images/1lose.gif", "assets/images/2lose.gif", "assets/images/3lose.gif", "assets/images/4lose.gif", "assets/images/5lose.gif"];
 
-    var questions = ["Question 1", "Question 2", "Questions 3", "Questions 4", "Questions 5"];
-    var correctAnswersArray = ["Answer2", "Answer3", "Answer1", "Answer1", "Answer1"];
+    var questions = ["What sport is Michael Jordan best known for?",
+        "What movie is Don Travolta's meme from?",
+        "Which animal has at least 10 different vocalizations that are used to communicate?",
+        "What is the Chemical Compound for Salt?",
+        "What Animal is commonly associated to have 7 lives?"];
+    var correctAnswersArray = ["Basketball", "Pulp Fiction", "Baboons", "NaCl", "Cats"];
     var answersArray = [
-        ["Answer1", "Answer2", "Answer3", "Answer4"],
-        ["Answer1", "Answer2", "Answer3", "Answer4"],
-        ["Answer1", "Answer2", "Answer3", "Answer4"],
-        ["Answer1", "Answer2", "Answer3", "Answer4"],
-        ["Answer1", "Answer2", "Answer3", "Answer4"]
+        ["Football", "Skiiball", "Baseball", "Basketball"],
+        ["Grease", "Pulp Fiction", "Face/Off", "Staying Alive"],
+        ["Chimpanzees", "Baboons", "Parrots", "Lemurs"],
+        ["NaCl", "NaBr", "NaOH", "NaBrO"],
+        ["Toucans", "Dogs", "Cats", "Horses"]
     ];
 
     //To hide the start button
