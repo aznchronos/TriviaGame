@@ -24,7 +24,6 @@ $(document).ready(function(){
         $("#startGame").hide();
         $("#image-holder").hide();
         started = true;
-        clock();
         generatePage();
     });
 
@@ -40,17 +39,6 @@ $(document).ready(function(){
             // console.log("Incorrect count: " + incorrect)
         }
     });
-
-    $("body").on("click", ".reset", function(event){
-        var correct = 0;
-        var incorrect = 0;
-        var unanswered = 0;
-        var counter = 0;
-        var timer = 30;
-        started = true;
-        generatePage();
-        clock();
-    })
 
     //Set 30 second timer to function;
     function clock() {
@@ -78,6 +66,7 @@ $(document).ready(function(){
             "</button><button class='answer'>" + answersArray[counter][3] +
             "</button></div>";
         $(".gameID").html(gamePage);
+        clock();
     };
 
     function endGame() {
@@ -85,23 +74,30 @@ $(document).ready(function(){
             "<h3 class='text-center'>Number Correct: " + correct + "</h3>" +
             "<h3 class='text-center'>Number Incorrect: " + incorrect + "</h3>" +
             "<h3 class='text-center'>Number Unanswered: " + unanswered + "</h3>" +
-            "<button class='reset'>Reset?</button>"
+            "<button class='reset'>Reset?</button>";
             $(".gameID").html(gamePage);
-            clearTimeout();
-            clearInterval();
+            clearInterval(time);
             started = false;
+            $(".reset").click(function(event){
+                correct = 0;
+                incorrect = 0;
+                unanswered = 0;
+                counter = 0;
+                timer = 30;
+                started = true;
+                generatePage();
+            });
     }
 
     function correctAnswer(){
         correct++;
-        timer = 5;
         // console.log("correct answer: " + correctAnswersArray[counter]);
-        gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
-            timer + "</span></h1><h3 class='text-center'>You Win!</h3>" +
+        gamePage = "<h1 class='text-center'>You Win!</h1>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
             $(".gameID").html(gamePage);
             displayWinImage();
+            clearInterval(time);
             setTimeout(function(){
                 wait();
             }, 5000);
@@ -109,34 +105,33 @@ $(document).ready(function(){
 
     function incorrectAnswer(){
         incorrect++;
-        timer = 5;
         console.log("correct answer: " + correctAnswersArray[counter]);
-        gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
-            timer + "</span></h1><h3 class='text-center'>You Lose!</h3>" +
+        gamePage = "<h1 class='text-center'>You Lose!</h1>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
             $(".gameID").html(gamePage);
             displayLoseImage();
+            clearInterval(time);
             setTimeout(wait, 5000);
     }
 
     function questionTimeout() {
         unanswered++;
-        timer = 5;
-        gamePage = "<h1 class='text-center timer-p'>Time Remaining: <span class='timer'>" +
-            timer + "</span></h1><h3 class='text-center'>Times Up!</h3>" +
+        gamePage = "<h1 class='text-center'>Times Up!</h1>" +
             "<h3 class='text-center'>The answer is: " + correctAnswersArray[counter] + "</h3>" +
             "<div id='image-holder' class='text-center'></div>"
             $(".gameID").html(gamePage);
             displayLoseImage();
+            clearInterval(time);
             setTimeout(wait, 5000);
     };
     
     function wait() {
         if(counter < questions.length - 1){
             counter++;
-            generatePage();
+            clearInterval(time);
             timer = 30;
+            generatePage();
         } else {
             endGame();
         }
